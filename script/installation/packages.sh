@@ -8,6 +8,7 @@
 ##
 ## Supported environments:
 ##  * Ubuntu 18.04
+##  * Ubuntu 20.04
 ##  * macOS
 ## =================================================================
 
@@ -31,7 +32,7 @@ OSX_TEST_PACKAGES=(\
   "lsof" \
 )
 
-LINUX_BUILD_PACKAGES=(\
+LINUX_BUILD_PACKAGES_BIONIC=(\
   "build-essential" \
   "clang-8" \
   "clang-format-8" \
@@ -43,6 +44,28 @@ LINUX_BUILD_PACKAGES=(\
   "libevent-dev" \
   "libjemalloc-dev" \
   "libpq-dev" \
+  "libssl-dev" \
+  "libtbb-dev" \
+  "zlib1g-dev" \
+  "llvm-8" \
+  "pkg-config" \
+  "postgresql-client" \
+  "wget" \
+  "python3-pip" \
+)
+LINUX_BUILD_PACKAGES_FOCAL=(\
+  "build-essential" \
+  "clang-8" \
+  "clang-format-8" \
+  "clang-tidy-8" \
+  "cmake" \
+  "doxygen" \
+  "git" \
+  "g++-9" \
+  "libevent-dev" \
+  "libjemalloc-dev" \
+  "libpq-dev" \
+  "libpqxx-dev" \
   "libssl-dev" \
   "libtbb-dev" \
   "zlib1g-dev" \
@@ -140,7 +163,8 @@ install() {
       
       # Check Ubuntu version
       case $VERSION in
-        18.04) install_linux ;;
+        18.04) install_linux_bionic ;;
+        20.04) install_linux_focal ;;
         *) give_up $DISTRO $VERSION;;
       esac
       ;;
@@ -186,13 +210,13 @@ install_mac() {
   done
 }
 
-install_linux() {
+install_linux_bionic() {
   # Update apt-get.
   apt-get -y update
   
   # Install packages.
   if [ "$INSTALL_TYPE" == "build" -o "$INSTALL_TYPE" = "all" ]; then
-    apt-get -y install `( IFS=$' '; echo "${LINUX_BUILD_PACKAGES[*]}" )`
+    apt-get -y install `( IFS=$' '; echo "${LINUX_BUILD_PACKAGES_BIONIC[*]}" )`
   fi
   if [ "$INSTALL_TYPE" == "test" -o "$INSTALL_TYPE" = "all" ]; then
     apt-get -y install `( IFS=$' '; echo "${LINUX_TEST_PACKAGES[*]}" )`
@@ -220,6 +244,25 @@ install_linux() {
     fi
     dpkg -i $file
     rm $file
+  done
+}
+
+install_linux_focal() {
+  # Update apt-get.
+  apt-get -y update
+
+  # Install packages.
+  if [ "$INSTALL_TYPE" == "build" -o "$INSTALL_TYPE" = "all" ]; then
+    apt-get -y install `( IFS=$' '; echo "${LINUX_BUILD_PACKAGES_FOCAL[*]}" )`
+  fi
+  if [ "$INSTALL_TYPE" == "test" -o "$INSTALL_TYPE" = "all" ]; then
+    apt-get -y install `( IFS=$' '; echo "${LINUX_TEST_PACKAGES[*]}" )`
+  fi
+
+  # Always install Python stuff
+  # python3 -m pip --version || install_pip
+  for pkg in "${PYTHON_PACKAGES[@]}"; do
+    python3 -m pip show $pkg || python3 -m pip install $pkg
   done
 }
 
