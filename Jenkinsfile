@@ -32,10 +32,10 @@ pipeline {
                     }
                 }
 
-                stage('ubuntu-18.04/gcc-7.3.0 (Debug/format/lint/censored)') {
+                stage('ubuntu-20.04/gcc-9.3.0 (Debug/format/lint/censored)') {
                     agent {
                         docker {
-                            image 'ubuntu:bionic'
+                            image 'terrier:focal'
                         }
                     }
                     steps {
@@ -55,10 +55,10 @@ pipeline {
                     }
                 }
 
-                stage('ubuntu-18.04/clang-8.0.0 (Debug/format/lint/censored)') {
+                stage('ubuntu-20.04/clang-8.0.0 (Debug/format/lint/censored)') {
                     agent {
                         docker {
-                            image 'ubuntu:bionic'
+                            image 'terrier:focal'
                         }
                     }
                     environment {
@@ -116,10 +116,10 @@ pipeline {
                     }
                 }
 
-                stage('ubuntu-18.04/gcc-7.3.0 (Debug/ASAN/unittest)') {
+                stage('ubuntu-20.04/gcc-9.3.0 (Debug/ASAN/unittest)') {
                     agent {
                         docker {
-                            image 'ubuntu:bionic'
+                            image 'terrier:focal'
                             args '--cap-add sys_ptrace -v /jenkins/ccache:/home/jenkins/.ccache'
                         }
                     }
@@ -145,10 +145,10 @@ pipeline {
                     }
                 }
 
-                stage('ubuntu-18.04/gcc-7.3.0 (Debug/Coverage/unittest)') {
+                stage('ubuntu-20.04/gcc-9.3.0 (Debug/Coverage/unittest)') {
                     agent {
                         docker {
-                            image 'ubuntu:bionic'
+                            image 'terrier:focal'
                             args '-v /jenkins/ccache:/home/jenkins/.ccache'
                         }
                     }
@@ -188,10 +188,10 @@ pipeline {
                     }
                 }
 
-                stage('ubuntu-18.04/clang-8.0.0 (Debug/ASAN/unittest)') {
+                stage('ubuntu-20.04/clang-8.0.0 (Debug/ASAN/unittest)') {
                     agent {
                         docker {
-                            image 'ubuntu:bionic'
+                            image 'terrier:focal'
                             args '--cap-add sys_ptrace -v /jenkins/ccache:/home/jenkins/.ccache'
                         }
                     }
@@ -250,10 +250,10 @@ pipeline {
                     }
                 }
 
-                stage('ubuntu-18.04/gcc-7.3.0 (Release/unittest)') {
+                stage('ubuntu-20.04/gcc-9.3.0 (Release/unittest)') {
                     agent {
                         docker {
-                            image 'ubuntu:bionic'
+                            image 'terrier:focal'
                             args '-v /jenkins/ccache:/home/jenkins/.ccache'
                         }
                     }
@@ -278,10 +278,10 @@ pipeline {
                     }
                 }
 
-                stage('ubuntu-18.04/clang-8.0.0 (Release/unittest)') {
+                stage('ubuntu-20.04/clang-8.0.0 (Release/unittest)') {
                     agent {
                         docker {
-                            image 'ubuntu:bionic'
+                            image 'terrier:focal'
                             args '-v /jenkins/ccache:/home/jenkins/.ccache'
                         }
                     }
@@ -343,10 +343,10 @@ pipeline {
                         }
                     }
                 }
-                stage('ubuntu-18.04/gcc-7.3.0 (Debug/e2etest/oltpbench)') {
+                stage('ubuntu-20.04/gcc-9.3.0 (Debug/e2etest/oltpbench)') {
                     agent {
                         docker {
-                            image 'ubuntu:bionic'
+                            image 'terrier:focal'
                             args '--cap-add sys_ptrace -v /jenkins/ccache:/home/jenkins/.ccache'
                         }
                     }
