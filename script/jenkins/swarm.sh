@@ -10,9 +10,16 @@
 # @reboot /Users/jenkins/swarm.sh -executors 1 -labels macos
 #
 
-
 cd $(dirname $0)
-PATH=/usr/local/bin:$PATH
+# force specific versions of java and python3 on macOS
+if [ "${OSTYPE}" = "darwin18" ]; then
+  PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  JAVA_HOME="/usr/local/opt/openjdk@11"
+  PATH="${JAVA_HOME}:${PATH}"
+  PATH="/usr/local/opt/python@3.8/bin:${PATH}"
+else
+  PATH=/usr/local/bin:$PATH
+fi
 
 JENKINS_URL="http://jenkins.db.cs.cmu.edu:8080"
 # note that the following username is immaterial - the password is what matters
