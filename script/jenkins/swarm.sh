@@ -14,8 +14,10 @@ cd $(dirname $0)
 # force specific versions of java and python3 on macOS
 if [ "${OSTYPE}" = "darwin18" ]; then
   PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-  JAVA_HOME="/usr/local/opt/openjdk@11"
-  PATH="${JAVA_HOME}:${PATH}"
+  # the following should be a symlink to whichever jdk you mean to actually use in the worker,
+  # e.g., /Users/jenkins/jdk-11.0.9.1+1/Contents/Home for AdoptOpenJDK
+  JAVA_HOME="/Users/jenkins/jdk"
+  PATH="${JAVA_HOME}/bin:${PATH}"
   PATH="/usr/local/opt/python@3.8/bin:${PATH}"
 else
   PATH=/usr/local/bin:$PATH
