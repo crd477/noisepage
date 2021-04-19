@@ -10,9 +10,9 @@ Jenkins operation is driven by `Jenkinsfile` in the repository.  In order to cre
 
    1. Select "**cmu-db**" for "Which organization does the repository belong to?"
 
-   1. Select the "**terrier**" repository and "**Create Pipeline**"
+   1. Select the "**noisepage**" repository and "**Create Pipeline**"
 
-1. Once the pipeline is created, navigate to the [project page](http://jenkins.db.cs.cmu.edu:8080/job/terrier/), and select "**Configure**" from the left sidebar and adjust the following:
+1. Once the pipeline is created, navigate to the [project page](http://jenkins.db.cs.cmu.edu:8080/job/noisepage/), and select "**Configure**" from the left sidebar and adjust the following:
 
 * **Branch Sources**
    * **GitHub**
@@ -45,7 +45,7 @@ The following steps (required, unless specified otherwise) describe the preparat
 
 1. pull and run an image of the type you want to configure, e.g.,
    ```
-   docker run -it --name jenkins-prep ubuntu:bionic
+   docker run -it --name jenkins-prep noisepage:focal
    ```
 1. install any prerequisite packages that are needed for `script/installation/packages.sh` to run, e.g.
    ```
@@ -60,5 +60,5 @@ The following steps (required, unless specified otherwise) describe the preparat
 1. *(optional)* prepopulate the image with prerequisite software packages from `packages.sh` to avoid delays fetching software or errors from unavailability of mirrors.  This can be accomplished by creating a copy of that script in the container and running it there.
 1. exit the container and save your work, e.g.,
    ```
-   docker commit jenkins-prep ubuntu:bionic
+   docker commit jenkins-prep noisepage:focal
    ```

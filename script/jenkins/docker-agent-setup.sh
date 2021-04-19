@@ -55,8 +55,8 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 apt-get update && apt-get -y install docker-ce docker-ce-cli containerd.io
 
-# get the latest bionic image for jenkins
-docker image load -i /proj/CMUDB-CI/data/ubuntu-bionic-jenkins-latest.tar
+# get the latest focal image for jenkins
+docker image load -i /proj/CMUDB-CI/data/noisepage-focal-jenkins-latest.tar
 
 # make sure the jenkins user can run docker
 usermod -a -G docker jenkins
