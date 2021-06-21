@@ -7,7 +7,7 @@ LOCAL_REPO_DIR = os.path.realpath("local")
 # Jenkins URL
 JENKINS_URL = "http://jenkins.db.cs.cmu.edu:8080"
 # Jenkins project used to compare 30 day average
-JENKINS_REF_PROJECT = "terrier-nightly"
+JENKINS_REF_PROJECT = "noisepage-nightly"
 
 # How many historical values are "required" before enforcing the threshold check
 MIN_REF_VALUES = 20
